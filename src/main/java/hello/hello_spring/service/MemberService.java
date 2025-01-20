@@ -3,16 +3,20 @@ package hello.hello_spring.service;
 import hello.hello_spring.domain.Member;
 import hello.hello_spring.repository.MemberRepository;
 import hello.hello_spring.repository.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+//@Service
 public class MemberService {
     // cmd shift T 하면 쉽게 테스트 코드 생성 가능
 
 //    private  final MemberRepository memberRepository = new MemoryMemberRepository();
     private  final MemberRepository memberRepository; // 테스트에서든 어디서든 같은 레포지토리를 사용하기 위해 이렇게 한다.
-    public MemberService(MemoryMemberRepository memberRepository) {
+//    @Autowired
+    public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
 
