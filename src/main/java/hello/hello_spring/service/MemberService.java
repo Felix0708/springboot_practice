@@ -5,17 +5,19 @@ import hello.hello_spring.repository.MemberRepository;
 import hello.hello_spring.repository.MemoryMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 //@Service
+@Transactional
 public class MemberService {
     // cmd shift T 하면 쉽게 테스트 코드 생성 가능
 
-//    private  final MemberRepository memberRepository = new MemoryMemberRepository();
+    //    private  final MemberRepository memberRepository = new MemoryMemberRepository();
     private  final MemberRepository memberRepository; // 테스트에서든 어디서든 같은 레포지토리를 사용하기 위해 이렇게 한다.
-//    @Autowired
+    //    @Autowired
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
@@ -33,10 +35,19 @@ public class MemberService {
 //                .ifPresent(m -> {
 //                    throw new IllegalStateException("이미 존재하는 회원입니다.");
 //                });
+//        long start = System.currentTimeMillis();
+//        try {
+//            validateDuplicateMember(member); //중복 회원 검증
+//            memberRepository.save(member);
+//            return member.getId();
+//        } finally {
+//            long finish = System.currentTimeMillis();
+//            long timeMs = finish - start;
+//            System.out.println("join " + timeMs + "ms");
+//        }
         validateDuplicateMember(member);
         memberRepository.save(member);
         return member.getId();
-
     }
 
     private void validateDuplicateMember(Member member) {
@@ -50,6 +61,14 @@ public class MemberService {
      * 전체 회원 조회
      */
     public List<Member> findMembers() {
+//        long start = System.currentTimeMillis();
+//        try {
+//            return memberRepository.findAll();
+//        } finally {
+//            long finish = System.currentTimeMillis();
+//            long timeMs = finish - start;
+//            System.out.println("findMembers " + timeMs + "ms");
+//        }
         return  memberRepository.findAll();
     }
 

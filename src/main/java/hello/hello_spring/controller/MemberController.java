@@ -18,6 +18,8 @@ public class MemberController {
     @Autowired
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
+//        System.out.println("memberservice = " + memberService.getClass());
+        // 프록시로 가짜 컨트롤러 서비스등을 생성해서 그걸 전달하는 느낌
     }
 
     @GetMapping("/members/new")
